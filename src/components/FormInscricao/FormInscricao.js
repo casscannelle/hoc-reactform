@@ -49,7 +49,8 @@ const FormInscricao = () => {
     return (
         <div className="form-container">
             <form onSubmit={onSubmit} className="space-y-8">
-                <label>Nome:</label>
+                <div>
+                    <label>Nome:</label>
                     <input
                     value={nome}
                     onChange={(e) => setNome(e.target.value)}
@@ -59,7 +60,9 @@ const FormInscricao = () => {
                     required
                     />
                     {!errors.hasOwnProperty('nome') ? null : <p className="error-message">{errors.nome}</p>}
-                <label>E-mail:</label>
+                </div>
+                <div>
+                    <label>E-mail:</label>
                     <input
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
@@ -68,7 +71,9 @@ const FormInscricao = () => {
                     placeholder="E-mail"
                     required
                     />
-                <label>Data de Nascimento:</label>
+                </div>
+                <div>
+                    <label>Data de Nascimento:</label>
                     <input
                     value={aniversario}
                     onChange={(e) => setAniversario(e.target.value)}
@@ -77,7 +82,9 @@ const FormInscricao = () => {
                     placeholder=""
                     required
                     />
-                <label>Telefone:</label>
+                </div>
+                <div>
+                    <label>Telefone:</label>
                     <input
                     value={telefone}
                     onChange={(e) => setTelefone(e.target.value)}
@@ -87,9 +94,12 @@ const FormInscricao = () => {
                     required
                     />
                     {!errors.hasOwnProperty('telefone') ? null : <p className="error-message">{errors.telefone}</p>}
-                <button className="btn-modal" type="submit" disabled={isSubmitting}>
+                </div>
+                <div>
+                    <button className="btn-modal" type="submit" disabled={isSubmitting}>
                     Enviar
                 </button>
+                </div>
             </form>
         </div>  
 
