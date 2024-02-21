@@ -4,22 +4,21 @@ const FormEncomenda = () => {
     const [nome, setNome] = useState('');
     const [email, setEmail] = useState('');
     const [telefone, setTelefone] = useState('');
+    const [produto, setProduto] = useState('');
     const [mensagem, setMensagem] = useState('');
     const [isSubmitting, setIsSubmitting] = useState(false);
     const [errors, setErrors] = useState({});
 
-    const telefoneRegex = /^(\d{2})(\d{5})(\d{4})$/;
 
     const validateForm = () => {
         const errors = {};
         if (nome.length < 3) {
             errors.nome = 'Por favor, digite seu nome';
         }
-        if (!telefoneRegex.test(telefone)) {
-            errors.telefone = 'Por favor, digite um telefone válido';
-        } else if (/(\d)\1{10}/.test(telefone.replace(/\D/g, ''))) {
-            errors.telefone = 'Por favor, evite números repetidos no telefone';
+        if (mensagem.length === 0) {
+            errors.mensagem = 'Por favor, explique sua encomenda';
         }
+        
         return errors;
     };
 
@@ -37,7 +36,8 @@ const FormEncomenda = () => {
         setNome('');
         setEmail('');
         setTelefone('');
-        setAniversario('');
+        setProduto('');
+        setMensagem('');
         setErrors({});
         }
         else {
@@ -45,7 +45,7 @@ const FormEncomenda = () => {
         }
     };
 
-    
+    console.log(onSubmit);
     return (
         <div className="form-container">
             <form onSubmit={onSubmit} className="space-y-8">
@@ -68,15 +68,6 @@ const FormEncomenda = () => {
                     placeholder="E-mail"
                     required
                     />
-                <label>Data de Nascimento:</label>
-                    <input
-                    value={aniversario}
-                    onChange={(e) => setAniversario(e.target.value)}
-                    type="date"
-                    id="aniversario"
-                    placeholder=""
-                    required
-                    />
                 <label>Telefone:</label>
                     <input
                     value={telefone}
@@ -86,7 +77,32 @@ const FormEncomenda = () => {
                     placeholder="(00)00000-0000"
                     required
                     />
-                    {!errors.hasOwnProperty('telefone') ? null : <p className="error-message">{errors.telefone}</p>}
+                <label>Produto</label>
+                    <select
+                    value={produto}
+                    onChange={(e) => setProduto(e.target.value)}
+                    id="produto"
+                    placeholder="produto"
+                    required
+                    >
+                        <option value="bolo">Bolo</option>
+                        <option value="torta">Torta</option>
+                        <option value="sorvete">Sorvete</option>
+                    </select>
+                    
+                <label>Mensagem:</label>
+                    <textarea
+                    value={mensagem}
+                    onChange={(e) => setMensagem(e.target.value)}
+                    type="text"
+                    id="mensagem"
+                    placeholder=""
+                    maxLength={500}
+                    cols={50}
+                    rows={4}
+                    required
+                    />
+                    {!errors.hasOwnProperty('mensagem') ? null : <p className="error-message">{errors.mensagem}</p>}
                 <button type="submit" disabled={isSubmitting}>
                     Submit
                 </button>

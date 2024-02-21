@@ -22,7 +22,6 @@ const withModal = (WrappedComponent) => {
         />
 
         <Modal isOpen={modalAberto} onRequestClose={fecharModal}>
-          {/* Renderize o componente de formulário aqui */}
           <WrappedComponent.FormularioModal onClose={fecharModal} />
         </Modal>
       </div>
