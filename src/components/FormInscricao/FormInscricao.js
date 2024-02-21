@@ -87,8 +87,8 @@ const FormInscricao = () => {
                     required
                     />
                     {!errors.hasOwnProperty('telefone') ? null : <p className="error-message">{errors.telefone}</p>}
-                <button type="submit" disabled={isSubmitting}>
-                    Submit
+                <button className="btn-modal" type="submit" disabled={isSubmitting}>
+                    Enviar
                 </button>
             </form>
         </div>  

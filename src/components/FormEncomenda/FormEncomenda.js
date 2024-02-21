@@ -49,7 +49,8 @@ const FormEncomenda = () => {
     return (
         <div className="form-container">
             <form onSubmit={onSubmit} className="space-y-8">
-                <label>Nome:</label>
+                <div>
+                    <label>Nome:</label>
                     <input
                     value={nome}
                     onChange={(e) => setNome(e.target.value)}
@@ -59,7 +60,9 @@ const FormEncomenda = () => {
                     required
                     />
                     {!errors.hasOwnProperty('nome') ? null : <p className="error-message">{errors.nome}</p>}
-                <label>E-mail:</label>
+                </div>
+                <div>
+                    <label>E-mail:</label>
                     <input
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
@@ -68,7 +71,9 @@ const FormEncomenda = () => {
                     placeholder="E-mail"
                     required
                     />
-                <label>Telefone:</label>
+                </div>
+                <div>
+                    <label>Telefone:</label>
                     <input
                     value={telefone}
                     onChange={(e) => setTelefone(e.target.value)}
@@ -77,6 +82,8 @@ const FormEncomenda = () => {
                     placeholder="(00)00000-0000"
                     required
                     />
+                </div>
+                <div>
                 <label>Produto</label>
                     <select
                     value={produto}
@@ -89,7 +96,8 @@ const FormEncomenda = () => {
                         <option value="torta">Torta</option>
                         <option value="sorvete">Sorvete</option>
                     </select>
-                    
+                </div>
+                <div>
                 <label>Mensagem:</label>
                     <textarea
                     value={mensagem}
@@ -103,9 +111,12 @@ const FormEncomenda = () => {
                     required
                     />
                     {!errors.hasOwnProperty('mensagem') ? null : <p className="error-message">{errors.mensagem}</p>}
-                <button type="submit" disabled={isSubmitting}>
-                    Submit
+                </div>
+                <span>
+                <button className="btn-modal" type="submit" disabled={isSubmitting}>
+                    Enviar
                 </button>
+                </span>
             </form>
         </div>  
 
