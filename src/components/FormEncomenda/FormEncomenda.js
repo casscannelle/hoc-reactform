@@ -1,7 +1,9 @@
 import { useState } from "react";
+import withNomeValidation from "../withNameValidation/withNameValidation";
 
-const FormEncomenda = () => {
-    const [nome, setNome] = useState('');
+const FormEncomenda = (props) => {
+    const { nome, isValidNome, errorNome, validateNome, clearNome } = props;
+
     const [email, setEmail] = useState('');
     const [telefone, setTelefone] = useState('');
     const [produto, setProduto] = useState('');
@@ -12,9 +14,6 @@ const FormEncomenda = () => {
 
     const validateForm = () => {
         const errors = {};
-        if (nome.length < 3) {
-            errors.nome = 'Por favor, digite seu nome';
-        }
         if (mensagem.length === 0) {
             errors.mensagem = 'Por favor, explique sua encomenda';
         }
@@ -33,7 +32,7 @@ const FormEncomenda = () => {
         alert('Enviado!');
         setIsSubmitting(false);
 
-        setNome('');
+        clearNome();
         setEmail('');
         setTelefone('');
         setProduto('');
@@ -48,18 +47,18 @@ const FormEncomenda = () => {
     console.log(onSubmit);
     return (
         <div className="form-container">
-            <form onSubmit={onSubmit} className="space-y-8">
+            <form onSubmit={onSubmit} className="">
                 <div>
                     <label>Nome:</label>
                     <input
                     value={nome}
-                    onChange={(e) => setNome(e.target.value)}
+                    onChange={(e) => validateNome(e.target.value)}
                     type="text"
                     id="nome"
                     placeholder="Nome"
                     required
                     />
-                    {!errors.hasOwnProperty('nome') ? null : <p className="error-message">{errors.nome}</p>}
+                    {isValidNome ? null : <p>{errorNome}</p>}
                 </div>
                 <div>
                     <label>E-mail:</label>
@@ -124,4 +123,4 @@ const FormEncomenda = () => {
 }
 
 
-export default FormEncomenda;
+export default withNomeValidation(FormEncomenda);

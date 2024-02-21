@@ -1,7 +1,9 @@
 import { useState } from "react";
+import withNomeValidation from "../withNameValidation/withNameValidation";
 
-const FormInscricao = () => {
-    const [nome, setNome] = useState('');
+const FormInscricao = (props) => {
+    const { nome, isValidNome, errorNome, validateNome, clearNome } = props;
+
     const [email, setEmail] = useState('');
     const [telefone, setTelefone] = useState('');
     const [aniversario, setAniversario] = useState('');
@@ -12,14 +14,15 @@ const FormInscricao = () => {
 
     const validateForm = () => {
         const errors = {};
-        if (nome.length < 3) {
-            errors.nome = 'Por favor, digite seu nome';
-        }
+        
         if (!telefoneRegex.test(telefone)) {
             errors.telefone = 'Por favor, digite um telefone válido';
         } else if (/(\d)\1{10}/.test(telefone.replace(/\D/g, ''))) {
             errors.telefone = 'Por favor, evite números repetidos no telefone';
         }
+        
+        validateNome(nome);
+
         return errors;
     };
 
@@ -34,7 +37,7 @@ const FormInscricao = () => {
         alert('Enviado!');
         setIsSubmitting(false);
 
-        setNome('');
+        clearNome();
         setEmail('');
         setTelefone('');
         setAniversario('');
@@ -48,18 +51,18 @@ const FormInscricao = () => {
     
     return (
         <div className="form-container">
-            <form onSubmit={onSubmit} className="space-y-8">
+            <form onSubmit={onSubmit} className="">
                 <div>
                     <label>Nome:</label>
                     <input
                     value={nome}
-                    onChange={(e) => setNome(e.target.value)}
+                    onChange={(e) => validateNome(e.target.value)}
                     type="text"
                     id="nome"
                     placeholder="Nome"
                     required
                     />
-                    {!errors.hasOwnProperty('nome') ? null : <p className="error-message">{errors.nome}</p>}
+                    {isValidNome ? null : <p>{errorNome}</p>}
                 </div>
                 <div>
                     <label>E-mail:</label>
@@ -107,4 +110,4 @@ const FormInscricao = () => {
 }
 
 
-export default FormInscricao;
+export default withNomeValidation(FormInscricao);
