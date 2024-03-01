@@ -90,7 +90,6 @@ function FormInscricao() {
     <div className='container-wrapper'>
       <div className='container-form'>
         <form>
-        <h1 className='form_h1'>Preencha seus dados</h1>
         <label>Nome:</label>
         <input className='form_input' type="text" name="nome" value={inputValue.nome} onChange={handleChange} required />
         {showAnswers || !errors.nome ? null : <p className="error-message">{errors.nome}</p>}

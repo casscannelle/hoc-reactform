@@ -51,7 +51,7 @@ const Modal = () => {
           <div className="modal-content">
             <h2>Faça seu cadastro</h2>
             <FormInscricao />
-            <button className='btn-modal' onClick={cadastroModal.closeModal}>Fechar</button>
+            <button className='btn-modal-fechar' onClick={cadastroModal.closeModal}>Fechar</button>
           </div>
         </div>
       )}
@@ -59,9 +59,10 @@ const Modal = () => {
       {encomendaModal.isOpen && (
         <div className="modal">
           <div className="modal-content">
+            <button className='btn-modal-fechar' onClick={encomendaModal.closeModal}>×</button>
             <h2>Faça sua encomenda</h2>
             <FormEncomenda />
-            <button className='btn-modal' onClick={encomendaModal.closeModal}>Fechar</button>
+            
           </div>
         </div>
       )}

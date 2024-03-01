@@ -76,3 +76,22 @@
 .btn-modal:hover {
   background-color: rgba(46, 143, 127, 0.808);
 }
+
+.btn-modal-fechar {
+  font-size: 1rem;
+  align-items: center;
+  color: #252525;
+  border: 1px solid rgb(185, 185, 185);
+  border-radius: 5px;
+  background-color: rgba(185, 185, 185, 0.822);
+  cursor: pointer;
+  margin-bottom: 0;
+  padding: 7px 7px;
+  margin-top: 20px;
+}
+
+.error-message {
+  font-size: smaller;
+  color: red;
+
+}
