@@ -29,6 +29,13 @@
 
 }
 
+input {
+  margin-left: 2%;
+}
+
+select {
+  margin-left: 2%;
+}
 .modal {
   position: fixed;
   top: 50%; 
@@ -52,12 +59,28 @@
   cursor: pointer;
   margin-bottom: 0;
   padding: 12px 20px;
-  width: 20%;
+  width: 30%;
 }
 
 .btn:hover {
   background-color: rgba(46, 143, 127, 0.808);
 }
+
+.btn-submit {
+  font-size: 1rem;
+  align-items: center;
+  border: 0 none;
+  border-radius: 25px;
+  color: #fff;
+  background-color: rgb(36, 199, 172);
+  cursor: pointer;
+  margin-bottom: 0;
+  margin-top: 20%;
+  padding: 10px 12px;
+  width: 30%;
+  margin: 3px;
+}
+
 
 .btn-modal {
   font-size: 1rem;
@@ -77,17 +100,19 @@
   background-color: rgba(46, 143, 127, 0.808);
 }
 
-.btn-modal-fechar {
+.close {
   font-size: 1rem;
   align-items: center;
   color: #252525;
-  border: 1px solid rgb(185, 185, 185);
   border-radius: 5px;
-  background-color: rgba(185, 185, 185, 0.822);
   cursor: pointer;
   margin-bottom: 0;
   padding: 7px 7px;
   margin-top: 20px;
+}
+
+.close:hover{
+  color: red;
 }
 
 .error-message {

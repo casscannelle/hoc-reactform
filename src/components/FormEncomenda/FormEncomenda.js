@@ -2,7 +2,7 @@ import { useState } from 'react';
 import React from 'react';
 
 const FormEncomenda = () => {
-  const [inputValue, setInputValue] = useState({ nome: '', email: '', produto: 'Bolo', sabor: '' });
+  const [inputValue, setInputValue] = useState({ nome: '', email: '', produto: 'Bolo', sabor: 'Chocolate' });
   const [showAnswers, setShowAnswers] = useState(false);
   const [errors, setErrors] = useState({});
   const [responses, setResponses] = useState([]);
@@ -64,9 +64,6 @@ const FormEncomenda = () => {
     setSelectedResponse(null);
   };
 
-  const toggleSortOrder = () => {
-    setSortOrder((prevSortOrder) => (prevSortOrder === 'newest' ? 'oldest' : 'newest'));
-  };
 
   const getSortedResponses = () => {
     return sortOrder === 'newest'
@@ -84,13 +81,18 @@ const FormEncomenda = () => {
     <div className='container-wrapper'>
       <div className='container-form'>
         <form>
+        <div>
         <label>Nome:</label>
         <input className='form_input' type="text" name="nome" value={inputValue.nome} onChange={handleChange} required />
         {showAnswers || !errors.nome ? null : <p className="error-message">{errors.nome}</p>}
+        </div>
+        <div>
         <label>E-mail:</label>
         <input className='form_input' type="email" name="email" value={inputValue.email} onChange={handleChange} required />
         {showAnswers || !errors.email ? null : <p className="error-message">{errors.email}</p>}
-        <label>Produdo</label>
+        </div>
+        <div>
+        <label>Produto</label>
         <div>
           <input type='radio' name="produto" value="Bolo" id="bolo" checked={inputValue.produto === "Bolo"} onChange={handleChange} />
           <label htmlFor="bolo">Bolo</label>
@@ -103,20 +105,22 @@ const FormEncomenda = () => {
           <input type='radio' name="produto" value="Mousse" id="mousse" checked={inputValue.produto === "Mousse"} onChange={handleChange} />
           <label htmlFor="mousse">Mousse</label>
         </div>
-
+        </div>
         <div>
         <label>Sabor:
-            <select name="sabor">
+            <select name="sabor" value={inputValue.sabor} onChange={handleChange}>
                 <option value="Chocolate">Chocolate</option>
                 <option value="Baunilha">Baunilha</option>
                 <option value="Morango">Morango</option>
             </select>
         </label>
+        {showAnswers}
         </div>
-        {showAnswers || !errors.produto ? null : <p className="error-message">{errors.produto}</p>}
-        <button className='btn' type="submit" onClick={handleSubmit}>
+        <div>
+        <button className='btn-submit' type="submit" onClick={handleSubmit}>
         {showAnswers === 'loading' ? 'Enviando' : 'Enviar'}
           </button>
+        </div>
         </form>
       </div>
       {/* Respostas por nome */}
@@ -125,10 +129,7 @@ const FormEncomenda = () => {
           <div>
             <>
             <h2>Respostas</h2>
-              <button className="btn-filter" onClick={toggleSortOrder}>
-                {sortOrder === 'newest' ? 'Mais recentes' : 'Mais antigas'}
-              </button>
-              </>
+            </>
             
             
             <ol>
@@ -160,13 +161,13 @@ const FormEncomenda = () => {
               <strong>Nome:</strong> {selectedResponse.nome}
             </p>
             <p>
-              <strong>Idade:</strong> {selectedResponse.idade}
-            </p>
-            <p>
               <strong>E-mail:</strong> {selectedResponse.email}
             </p>
             <p>
-              <strong>Gênero:</strong> {selectedResponse.gender}
+              <strong>Produto:</strong> {selectedResponse.produto}
+            </p>
+            <p>
+              <strong>Sabor:</strong> {selectedResponse.sabor}
             </p>
             <button className="btn" onClick={hideModal}>Fechar</button>
           </div>

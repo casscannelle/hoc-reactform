@@ -70,9 +70,6 @@ function FormInscricao() {
     setSelectedResponse(null);
   };
 
-  const toggleSortOrder = () => {
-    setSortOrder((prevSortOrder) => (prevSortOrder === 'newest' ? 'oldest' : 'newest'));
-  };
 
   const getSortedResponses = () => {
     return sortOrder === 'newest'
@@ -90,18 +87,22 @@ function FormInscricao() {
     <div className='container-wrapper'>
       <div className='container-form'>
         <form>
+        <div>
         <label>Nome:</label>
         <input className='form_input' type="text" name="nome" value={inputValue.nome} onChange={handleChange} required />
         {showAnswers || !errors.nome ? null : <p className="error-message">{errors.nome}</p>}
-        
+        </div>
+        <div>
         <label>E-mail:</label>
         <input className='form_input' type="email" name="email" value={inputValue.email} onChange={handleChange} required />
         {showAnswers || !errors.email ? null : <p className="error-message">{errors.email}</p>}
-        
+        </div>
+        <div>
         <label>Idade:</label>
         <input className='form_input' type="number" name="idade" value={inputValue.idade} onChange={handleChange} min="0" required />
         {showAnswers || !errors.idade ? null : <p className="error-message">{errors.idade}</p>}
-        
+        </div>
+        <div>
         <label>Gênero</label>
         <div>
           <input type='radio' name="gender" value="Feminino" id="feminino" checked={inputValue.gender === "Feminino"} onChange={handleChange} />
@@ -116,10 +117,12 @@ function FormInscricao() {
           <label htmlFor="naoinformado">Prefiro não informar</label>
         </div>
         {showAnswers || !errors.gender ? null : <p className="error-message">{errors.gender}</p>}
-        
-        <button className='btn' type="submit" onClick={handleSubmit}>
+        </div>
+        <div>
+        <button className='btn-submit' type="submit" onClick={handleSubmit}>
         {showAnswers === 'loading' ? 'Enviando' : 'Enviar'}
           </button>
+        </div>
         </form>
       </div>
       
@@ -128,11 +131,9 @@ function FormInscricao() {
         {showAnswers && (
           <div>
             <>
+            
             <h2>Respostas</h2>
-              <button className="btn-filter" onClick={toggleSortOrder}>
-                {sortOrder === 'newest' ? 'Mais recentes' : 'Mais antigas'}
-              </button>
-              </>
+            </>
             
             
             <ol>
