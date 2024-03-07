@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import React from 'react';
+import useSort from '../useSort/useSort';
 
 const FormEncomenda = () => {
   const [inputValue, setInputValue] = useState({ nome: '', email: '', produto: 'Bolo', sabor: 'Chocolate' });
@@ -7,7 +8,7 @@ const FormEncomenda = () => {
   const [errors, setErrors] = useState({});
   const [responses, setResponses] = useState([]);
   const [selectedResponse, setSelectedResponse] = useState(null);
-  const [sortOrder, setSortOrder] = useState('newest');
+  const { sortOrder, toggleSortOrder } = useSort('');
   
   
 
@@ -64,12 +65,14 @@ const FormEncomenda = () => {
     setSelectedResponse(null);
   };
 
-
   const getSortedResponses = () => {
     return sortOrder === 'newest'
       ? [...responses].sort((a, b) => b.timestamp - a.timestamp)
-      : [...responses].sort((a, b) => a.timestamp - b.timestamp);
+      : sortOrder === 'alphabetic'
+      ? [...responses].sort((a, b) => a.nome.localeCompare(b.nome))
+      : [...responses].sort((a, b) => b.nome.localeCompare(a.nome));
   };
+
 
   const deleteAnswer = (index) => {
     const updatedResponses = [...responses];
@@ -129,9 +132,17 @@ const FormEncomenda = () => {
           <div>
             <>
             <h2>Respostas</h2>
+            <div><button className="btn-filter" onClick={toggleSortOrder}>
+            {sortOrder === 'newest' ? 'Mais recentes' : 'Mais antigas'}
+            </button>
+            </div>
+            <div>
+            <button className="btn-filter" onClick={toggleSortOrder}>
+            {sortOrder === 'alphabetic' ? 'Alfabética': 'Alfabética'}
+            </button>
+            </div>
             </>
-            
-            
+                   
             <ol>
               {getSortedResponses().map((response, index) => (
                 <li key={index} >
