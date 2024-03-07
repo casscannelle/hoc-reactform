@@ -73,12 +73,14 @@ function FormInscricao() {
 
  
   const getSortedResponses = () => {
+    if (sortOrder === 'alphabetic') {
+      return [...responses].sort((a, b) => a.nome.localeCompare(b.nome));
+    }
     return sortOrder === 'newest'
       ? [...responses].sort((a, b) => b.timestamp - a.timestamp)
-      : sortOrder === 'alphabetic'
-      ? [...responses].sort((a, b) => a.nome.localeCompare(b.nome))
-      : [...responses].sort((a, b) => b.nome.localeCompare(a.nome));
+      : [...responses].sort((a, b) => a.nome.localeCompare(b.nome));
   };
+
 
   const deleteAnswer = (index) => {
     const updatedResponses = [...responses];
