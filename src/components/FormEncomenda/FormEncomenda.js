@@ -66,12 +66,15 @@ const FormEncomenda = () => {
   };
 
   const getSortedResponses = () => {
-    if (sortOrder === 'alphabetic') {
+    if (sortOrder === 'newest') {
+      return [...responses].sort((a, b) => b.timestamp - a.timestamp);
+    } else if (sortOrder === 'oldest') {
+      return [...responses].sort((a, b) => a.timestamp - b.timestamp);
+    } else if (sortOrder === 'alphabetic') {
       return [...responses].sort((a, b) => a.nome.localeCompare(b.nome));
+    } else if (sortOrder === 'reverseAlphabetic') {
+      return [...responses].sort((a, b) => b.nome.localeCompare(a.nome));
     }
-    return sortOrder === 'newest'
-      ? [...responses].sort((a, b) => b.timestamp - a.timestamp)
-      : [...responses].sort((a, b) => a.nome.localeCompare(b.nome));
   };
 
 

@@ -11,11 +11,26 @@ const useSort = (initialOrder) => {
 
   const toggleAlphabeticOrder = () => {
     setSortOrder((prevSortOrder) =>
-      prevSortOrder === 'alphabetic' ? 'reverseAlphabetic' : 'alphabetic'
+      prevSortOrder === 'alphabetic'
+        ? 'reverseAlphabetic'
+        : prevSortOrder === 'reverseAlphabetic'
+        ? 'alphabetic'
+        : 'alphabetic'
     );
   };
 
-  return { sortOrder, toggleSortOrder, toggleAlphabeticOrder };
+  const toggleReverseAlphabeticOrder = () => {
+    setSortOrder((prevSortOrder) =>
+      prevSortOrder === 'reverseAlphabetic' ? 'alphabetic' : 'reverseAlphabetic'
+    );
+  };
+
+  return {
+    sortOrder,
+    toggleSortOrder,
+    toggleAlphabeticOrder,
+    toggleReverseAlphabeticOrder,
+  };
 };
 
 export default useSort;
