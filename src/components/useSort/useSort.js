@@ -5,11 +5,17 @@ const useSort = (initialOrder) => {
 
   const toggleSortOrder = () => {
     setSortOrder((prevSortOrder) =>
-      prevSortOrder === 'newest' ? 'alphabetic' : 'newest'
+      prevSortOrder === 'newest' ? 'oldest' : 'newest'
     );
   };
 
-  return { sortOrder, toggleSortOrder };
+  const toggleAlphabeticOrder = () => {
+    setSortOrder((prevSortOrder) =>
+      prevSortOrder === 'alphabetic' ? 'reverseAlphabetic' : 'alphabetic'
+    );
+  };
+
+  return { sortOrder, toggleSortOrder, toggleAlphabeticOrder };
 };
 
 export default useSort;

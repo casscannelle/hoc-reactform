@@ -9,7 +9,7 @@ function FormInscricao() {
   const [errors, setErrors] = useState({});
   const [responses, setResponses] = useState([]);
   const [selectedResponse, setSelectedResponse] = useState(null);
-  const { sortOrder, toggleSortOrder } = useSort('newest');
+  const { sortOrder, toggleSortOrder, toggleAlphabeticOrder } = useSort('newest');
   
   
 
@@ -135,14 +135,15 @@ function FormInscricao() {
           <div>
             <>
             <h2>Respostas</h2>
-            <div><button className="btn-filter" onClick={toggleSortOrder}>
-            {sortOrder === 'newest' ? 'Mais recentes' : 'Mais antigas'}
-            </button>
+            <div>
+              <button className="btn-filter" onClick={toggleSortOrder}>
+                {sortOrder === 'newest' ? 'Mais recentes' : 'Mais antigas'}
+              </button>
             </div>
             <div>
-            <button className="btn-filter" onClick={toggleSortOrder}>
-            {sortOrder === 'alphabetic' ? 'Alfabética': 'Alfabética'}
-            </button>
+              <button className="btn-filter" onClick={toggleAlphabeticOrder}>
+                {sortOrder === 'alphabetic' ? 'A-Z' : 'Z-A'}
+              </button>
             </div>
             </>
             <ol>
