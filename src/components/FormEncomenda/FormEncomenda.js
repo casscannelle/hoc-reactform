@@ -37,6 +37,7 @@ const FormEncomenda = () => {
     } else {
       setErrors(validationErrors);
     }
+
   };
 
   const validateForm = () => {
@@ -83,7 +84,25 @@ const FormEncomenda = () => {
     updatedResponses.splice(index, 1);
     setResponses(updatedResponses);
   }
+  //editar a resposta
+  const editAnswer = (response) => {
+    hideModal(); 
+    setInputValue({
+      nome: response.nome,
+      email: response.email,
+      produto: response.produto,
+      sabor: response.sabor,
+    });
 
+    // Deleta a resposta original
+    const updatedResponses = [...responses];
+    const indexToDelete = responses.findIndex((item) => item === response);
+    if (indexToDelete !== -1) {
+      updatedResponses.splice(indexToDelete, 1);
+      setResponses(updatedResponses);
+    }
+  };
+  
   return (
     <div className='container-wrapper'>
       <div className='container-form'>
@@ -185,11 +204,17 @@ const FormEncomenda = () => {
             <p>
               <strong>Sabor:</strong> {selectedResponse.sabor}
             </p>
-            <button className="btn" onClick={hideModal}>Fechar</button>
+            <button className="btn" onClick={() => editAnswer(selectedResponse)}>
+              Editar
+            </button>
+            <button className="btn" onClick={hideModal}>
+              Fechar
+            </button>
           </div>
         </div>
       )}
     </div>
   );
-}
+};
+
 export default FormEncomenda;

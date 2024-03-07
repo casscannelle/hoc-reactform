@@ -91,6 +91,25 @@ function FormInscricao() {
     setResponses(updatedResponses);
   }
 
+  //editar a resposta
+  const editAnswer = (response) => {
+    hideModal(); 
+    setInputValue({
+      nome: response.nome,
+      email: response.email,
+      idade: response.idade,
+      gender: response.gender,
+    });
+
+    // Deleta a resposta original
+    const updatedResponses = [...responses];
+    const indexToDelete = responses.findIndex((item) => item === response);
+    if (indexToDelete !== -1) {
+      updatedResponses.splice(indexToDelete, 1);
+      setResponses(updatedResponses);
+    }
+  };
+
   return (
     <div className='container-wrapper'>
       <div className='container-form'>
@@ -188,6 +207,7 @@ function FormInscricao() {
             <p>
               <strong>Gênero:</strong> {selectedResponse.gender}
             </p>
+            <button className="btn" onClick={() => editAnswer(selectedResponse)}>Editar</button>
             <button className="btn" onClick={hideModal}>Fechar</button>
           </div>
         </div>
